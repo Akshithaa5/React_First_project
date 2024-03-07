@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Wrapper from '../Helpers/Wrapper';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import ErrorModal from '../UI/ErrorModal';
@@ -16,6 +16,7 @@ const AddUsers= (props) => {
       setError({
         title: 'Invalid input',
         message: 'Please enter a valid name and age (non-empty values).',
+
       });
       return;
      
@@ -40,19 +41,21 @@ const AddUsers= (props) => {
     setEnteredAge(event.target.value);
   };
   
-  const errorHandler = () => {
+  const errorHandler = () => {  
     setError(null);
   };
   return (
-    <div>
+    <Wrapper>
+    
     {error && (
       <ErrorModal
+      key = "error-model"
         title={error.title}
         message={error.message}
         onConfirm={errorHandler}
       />
     )}
-    <Card className={classes.input}>
+    <Card  className={classes.input}>
       <form onSubmit={addUserHandler}>
         <label htmlFor="username">Username</label>
         <input
@@ -71,8 +74,9 @@ const AddUsers= (props) => {
         <Button type="submit">Add User</Button>
       </form>
     </Card>
-    </div>
-  );
+    
+    </Wrapper>
+  )
 };
 
 export default AddUsers;
